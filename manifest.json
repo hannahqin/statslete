@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+
+  "name": "STATSLETE",
+  "description": "woooooo go statslete",
+  "version": "1.0.0",
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "statslete.html"
+  },
+  
+  "permissions": [
+    "activeTab",
+    "storage"
+  ]
+}
