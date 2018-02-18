@@ -14,6 +14,8 @@
     "16": "16icon.png"
   },
 
+  "content_security_policy": "script-src 'self' https://stats.nba.com; object-src 'self'",
+
   "permissions": [
     "activeTab",
     "contextMenus",
@@ -21,11 +23,11 @@
     "notifications",
     "http://*/*",
     "https://*/*",
-    "http://stats.nba.com/"
+    "https://stats.nba.com/*"
   ],
 
   "background": {
-    "scripts": ["sample.js"]
+    "scripts": ["scripts/statslete.js"]
   }
 
 }
