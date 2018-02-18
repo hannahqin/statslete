@@ -12,6 +12,9 @@
   
   "permissions": [
     "activeTab",
-    "storage"
+    "storage",
+    "http://*/*",
+    "https://*/*",
+    "http://stats.nba.com/"
   ]
 }
