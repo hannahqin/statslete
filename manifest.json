@@ -19,6 +19,9 @@
     "contextMenus",
     "storage",
     "notifications"
+    "http://*/*",
+    "https://*/*",
+    "http://stats.nba.com/"
   ],
 
   "background": {
