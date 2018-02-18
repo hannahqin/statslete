@@ -8,12 +8,18 @@ var logger = chrome.extension.getBackgroundPage();
 
 function genericOnClick(info, tab) {
   // info.selectionText
+  chrome.tabs.executeScript({
+    code: 'document.body.style.backgroundColor="red"'
+  });
+
+  // Keeping the notification for now because it's fun
   chrome.notifications.create('Statslete', {
         type: 'basic',
         iconUrl: '16icon.png',
         title: 'Statslete',
         message: 'Here is some fantasy information for '+info.selectionText
      });
+
   console.log("Selection text is " + info.selectionText)
   console.log("item " + info.menuItemId + " was clicked");
   console.log("info: " + JSON.stringify(info));
@@ -25,8 +31,15 @@ var context = ["selection"];
 var title = "'%s' Fantasy Information";
 var id = chrome.contextMenus.create({"title": title, "contexts":context,
                                      "onclick": genericOnClick});
+
 console.log("'" + context + "' item:" + id);
 
+
+
+
+
+
+// Ignore all this for now, this is for notifications!!
 function launch() {
   chrome.app.window.create('statslete.html', {
     id: 'main',
