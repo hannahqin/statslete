@@ -1,6 +1,3 @@
-
-alert("HI")
-
 //document.body.style.backgroundColor="blue"
 
 //$('body').append('<div>Hi Tom</div>');

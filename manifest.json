@@ -28,6 +28,15 @@
 
   "background": {
     "scripts": ["scripts/statslete.js"]
+  },
+
+  "content_scripts": [
+    {
+      "hmmm"
+    }
+
+  ]
+
   }
 
 }
