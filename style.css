@@ -1,9 +1,25 @@
 body {
-    font-family: 'Arial', sans-serif;
-    width: 400px;
-    margin: 0 5%;
+    font-family: 'Open Sans', sans-serif;
+    min-width: 400px;
+    padding: 0 5%;
 }
 
 #title {
     text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-style: italic;
+    padding-bottom: 10px;
+    border-bottom: .5px solid lightgray;
 }
+
+
+.athlete-photo {
+    width: 120px;
+    height: 165px;
+    background-size: cover;
+    background-position: center center;
+    float: left;
+    margin-right: 30px;
+}
+

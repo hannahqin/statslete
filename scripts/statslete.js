@@ -29,9 +29,13 @@ $(document).ready(function() {
                 'weight': parsed_data['WEIGHT']
             }
 
+            // get player image url
+            var image_url = "https://nba-players.herokuapp.com/players/" + parsed_data['LAST_NAME'] + "/" + parsed_data['FIRST_NAME'];
+
+            $('.athlete-photo').css('background-image', 'url("' + image_url + '")')
             $('.athlete-name').text(athlete.name);
             $('.team-name').text(athlete.team);
-            $('.position .number').text(athlete.number);
+            $('.position .number').text(athlete.number + ', ');
             $('.position .position-title').text(athlete.position);
             $('.school').text(athlete.school);
             $('.height').text(athlete.height);
@@ -51,3 +55,17 @@ $(document).ready(function() {
         }
     });
 });
+
+function getPlayerPhoto(firstname, lastname) {
+    var url = "https://nba-players.herokuapp.com/players/" + lastname + "/" + firstname;
+    $.ajax({
+        url: url,
+        dataType: "image/png",
+        crossDomain: true,
+        success: function(data) {
+            console.log(data);
+        }
+    });
+}
+
+
