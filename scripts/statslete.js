@@ -37,9 +37,9 @@ $(document).ready(function() {
             $('.team-name').text(athlete.team);
             $('.position .number').text(athlete.number + ', ');
             $('.position .position-title').text(athlete.position);
-            $('.school').text(athlete.school);
-            $('.height').text(athlete.height);
-            $('.weight').text(athlete.weight);
+            $('.school').text('College: ' + athlete.school);
+            $('.height').text('Height: ' + athlete.height);
+            $('.weight').text('Weight: ' + athlete.weight);
         }
     }); 
 

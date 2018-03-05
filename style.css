@@ -1,7 +1,12 @@
 body {
-    font-family: 'Open Sans', sans-serif;
-    min-width: 400px;
+    font-family: 'Source Sans Pro', sans-serif;
+    min-width: 350px;
     padding: 0 5%;
+}
+
+.col {
+    display: inline-block;
+    vertical-align: middle;
 }
 
 #title {
@@ -15,11 +20,30 @@ body {
 
 
 .athlete-photo {
-    width: 120px;
-    height: 165px;
+    width: 100px;
+    height: 125px;
     background-size: cover;
     background-position: center center;
-    float: left;
     margin-right: 30px;
 }
 
+.bio h4, .bio p {
+    font-size: 16px;
+    font-weight: 400;
+    margin: 6px 0;
+}
+
+.bio .athlete-name {
+    font-size: 26px;
+    margin: 10px 0;
+    padding-top: 10px;
+}
+
+.bio .team-name {
+    font-size: 20px;
+}
+
+.bio .position {
+    font-size: 18px;
+    color: gray;
+}
