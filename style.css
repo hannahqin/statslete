@@ -27,23 +27,27 @@ body {
     margin-right: 30px;
 }
 
-.bio h4, .bio p {
+.bio2 {
+    margin-top: 20px;
+}
+
+.bio1 h4, .bio2 p {
     font-size: 16px;
     font-weight: 400;
     margin: 6px 0;
 }
 
-.bio .athlete-name {
+.bio1 .athlete-name {
     font-size: 26px;
     margin: 10px 0;
     padding-top: 10px;
 }
 
-.bio .team-name {
+.bio1 .team-name {
     font-size: 20px;
 }
 
-.bio .position {
+.bio1 .position {
     font-size: 18px;
     color: gray;
 }
