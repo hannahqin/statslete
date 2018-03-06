@@ -1,9 +1,49 @@
 body {
-    font-family: 'Arial', sans-serif;
-    width: 400px;
-    margin: 0 5%;
+    font-family: 'Source Sans Pro', sans-serif;
+    min-width: 350px;
+    padding: 0 5%;
+}
+
+.col {
+    display: inline-block;
+    vertical-align: middle;
 }
 
 #title {
     text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-style: italic;
+    padding-bottom: 10px;
+    border-bottom: .5px solid lightgray;
+}
+
+
+.athlete-photo {
+    width: 100px;
+    height: 125px;
+    background-size: cover;
+    background-position: center center;
+    margin-right: 30px;
+}
+
+.bio h4, .bio p {
+    font-size: 16px;
+    font-weight: 400;
+    margin: 6px 0;
+}
+
+.bio .athlete-name {
+    font-size: 26px;
+    margin: 10px 0;
+    padding-top: 10px;
+}
+
+.bio .team-name {
+    font-size: 20px;
+}
+
+.bio .position {
+    font-size: 18px;
+    color: gray;
 }
