@@ -7,7 +7,6 @@ chrome.runtime.onMessage.addListener(
         //sendResponse({data: request.source, method: "getText"}); //same as innerText
         console.log(request.source)
 
-<<<<<<< HEAD
         console.log(players)
 
 
@@ -44,6 +43,7 @@ chrome.runtime.onMessage.addListener(
           onePrev = split[i]
         }
         getPlayerBioInfo(1628425);
+      }
     }
 );
 
@@ -81,8 +81,6 @@ $(document).ready(function() {
         }
     })
 });
-<<<<<<< HEAD
-=======
 
 // makes an AJAX request to get the biography info for player with playerID.
 // populates the HTML to fill in info about the player
@@ -131,6 +129,3 @@ function populatePlayerBioInfo(playerDict) {
     $('.height').text('Height: ' + playerDict.height);
     $('.weight').text('Weight: ' + playerDict.weight);
 }
-
-
->>>>>>> a685be50ec5244dd56080160c2d4bd29d74f1889
