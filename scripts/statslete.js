@@ -11,17 +11,8 @@ chrome.runtime.onMessage.addListener(
 
 $(document).ready(function() {
     $('.result').text('hello world');
-    console.log("HI")
-
-    var alltext = "hi"
-
-    /*chrome.runtime.sendMessage(chrome.tabs[0].id, {method: "getText"}, function(response) {
-        console.log(response)
-        alltext = response.data;
-      });*/
 
     chrome.tabs.executeScript({code: "chrome.runtime.sendMessage({ action: 'getText', source: document.body.innerText});"});
-    //console.log(chrome.tabs.executedocument.body.innerText)
 
     // commonplayerinfo (player biography)
     $.ajax({
@@ -94,17 +85,5 @@ $(document).ready(function() {
         }
     })
 });
-
-function getPlayerPhoto(firstname, lastname) {
-    var url = "https://nba-players.herokuapp.com/players/" + lastname + "/" + firstname;
-    $.ajax({
-        url: url,
-        dataType: "image/png",
-        crossDomain: true,
-        success: function(data) {
-            console.log(data);
-        }
-    });
-}
 
 

@@ -29,12 +29,5 @@
 
   "background": {
     "scripts": ["scripts/statslete.js"]
-  },
-
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["scripts/findAllText.js"]
-    }
-  ]
+  }
 }
