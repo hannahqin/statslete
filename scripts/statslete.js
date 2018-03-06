@@ -1,57 +1,16 @@
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-      console.log("HEY YA")
       if( request.action === "getText" ) {
-        console.log("YOOO")
         //sendResponse({data: request.source, method: "getText"}); //same as innerText
         console.log(request.source)
+
+        getPlayerBioInfo(1628425);
       }
     }
 );
 
 $(document).ready(function() {
-    $('.result').text('hello world');
-
     chrome.tabs.executeScript({code: "chrome.runtime.sendMessage({ action: 'getText', source: document.body.innerText});"});
-
-    // commonplayerinfo (player biography)
-    $.ajax({
-        url: "https://stats.nba.com/stats/commonplayerinfo/?playerid=1628425",
-        dataType: "jsonp",
-        crossDomain: true,
-        success: function (data) {
-            console.log(data);
-
-            // parse common player info into bio information
-            var headers = ["FIRST_NAME", "LAST_NAME", "TEAM_NAME", "TEAM_CITY", "JERSEY", "POSITION", "SCHOOL", "HEIGHT", "WEIGHT"];
-            var parsed_data = {}
-            for (i = 0; i < headers.length; i++) {
-                parsed_data[headers[i]] = data["resultSets"][0]["rowSet"][0][data["resultSets"][0]["headers"].indexOf(headers[i])];
-            }
-
-            athlete = {
-                'name': parsed_data['FIRST_NAME'] + ' ' + parsed_data['LAST_NAME'],
-                'team': parsed_data['TEAM_CITY'] + ' ' + parsed_data['TEAM_NAME'],
-                'number': '#' + parsed_data['JERSEY'],
-                'position': parsed_data['POSITION'],
-                'school': parsed_data['SCHOOL'],
-                'height': parsed_data['HEIGHT'],
-                'weight': parsed_data['WEIGHT']
-            }
-
-            // get player image url
-            var image_url = "https://nba-players.herokuapp.com/players/" + parsed_data['LAST_NAME'] + "/" + parsed_data['FIRST_NAME'];
-
-            $('.athlete-photo').css('background-image', 'url("' + image_url + '")')
-            $('.athlete-name').text(athlete.name);
-            $('.team-name').text(athlete.team);
-            $('.position .number').text(athlete.number + ', ');
-            $('.position .position-title').text(athlete.position);
-            $('.school').text('College: ' + athlete.school);
-            $('.height').text('Height: ' + athlete.height);
-            $('.weight').text('Weight: ' + athlete.weight);
-        }
-    });
 
     // playercareerstats
     $.ajax({
@@ -76,7 +35,6 @@ $(document).ready(function() {
             var fantasyScore = 0.0
 
             for(i = 0; i < infoNeeded.length; i++){
-
                 var stat = data["resultSets"][0]["rowSet"][0][data["resultSets"][0]["headers"].indexOf(infoNeeded[i])]
                 console.log(infoNeeded[i] + " " + stat)
                 fantasyScore += parseFloat(stat) * scoringMultiplier[i]
@@ -85,5 +43,53 @@ $(document).ready(function() {
         }
     })
 });
+
+// makes an AJAX request to get the biography info for player with playerID.
+// populates the HTML to fill in info about the player
+function getPlayerBioInfo(playerID) {
+    $.ajax({
+        url: "https://stats.nba.com/stats/commonplayerinfo/?playerid=" + playerID,
+        dataType: "jsonp",
+        crossDomain: true,
+        success: function (data) {
+            console.log(data);
+
+            // parse common player info into bio information
+            var headers = ["FIRST_NAME", "LAST_NAME", "TEAM_NAME", "TEAM_CITY", "JERSEY", "POSITION", "SCHOOL", "HEIGHT", "WEIGHT"];
+            var parsed_data = {}
+            for (i = 0; i < headers.length; i++) {
+                parsed_data[headers[i]] = data["resultSets"][0]["rowSet"][0][data["resultSets"][0]["headers"].indexOf(headers[i])];
+            }
+
+            // get player image url
+            var image_url = "https://nba-players.herokuapp.com/players/" + parsed_data['LAST_NAME'] + "/" + parsed_data['FIRST_NAME'];
+
+            var player = {
+                'name': parsed_data['FIRST_NAME'] + ' ' + parsed_data['LAST_NAME'],
+                'team': parsed_data['TEAM_CITY'] + ' ' + parsed_data['TEAM_NAME'],
+                'number': '#' + parsed_data['JERSEY'],
+                'position': parsed_data['POSITION'],
+                'school': parsed_data['SCHOOL'],
+                'height': parsed_data['HEIGHT'],
+                'weight': parsed_data['WEIGHT'],
+                'image': image_url
+            }
+
+            populatePlayerBioInfo(player);
+        }
+    });
+}
+
+// called from getPlayerBioInfo()
+function populatePlayerBioInfo(playerDict) {
+    $('.athlete-photo').css('background-image', 'url("' + playerDict.image + '")')
+    $('.athlete-name').text(playerDict.name);
+    $('.team-name').text(playerDict.team);
+    $('.position .number').text(playerDict.number + ', ');
+    $('.position .position-title').text(playerDict.position);
+    $('.school').text('College: ' + playerDict.school);
+    $('.height').text('Height: ' + playerDict.height);
+    $('.weight').text('Weight: ' + playerDict.weight);
+}
 
 
