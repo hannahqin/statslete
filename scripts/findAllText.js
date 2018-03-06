@@ -1,7 +1,11 @@
-chrome.extension.onRequest.addListener(
+console.log("HERE MAN")
+
+chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-        if(request.method == "getText"){
-            sendResponse({data: document.all[0].innerText, method: "getText"}); //same as innerText
-        }
+      console.log("HEY YA")
+      if( request.message === "getText" ) {
+        console.log("YOOO")
+        sendResponse({data: document.all[0].innerText, method: "getText"}); //same as innerText
+      }
     }
 );

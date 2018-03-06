@@ -1,18 +1,27 @@
+chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse) {
+      console.log("HEY YA")
+      if( request.action === "getText" ) {
+        console.log("YOOO")
+        //sendResponse({data: request.source, method: "getText"}); //same as innerText
+        console.log(request.source)
+      }
+    }
+);
+
 $(document).ready(function() {
-
-
-
     $('.result').text('hello world');
     console.log("HI")
 
-    chrome.tabs.getSelected(null, function(tab) {
-        chrome.tabs.sendRequest(tab.id, {method: "getText"}, function(response) {
-            if(response.method=="getText"){
-                alltext = response.data;
-            }
-        });
-    });
-    console.log(alltext)
+    var alltext = "hi"
+
+    /*chrome.runtime.sendMessage(chrome.tabs[0].id, {method: "getText"}, function(response) {
+        console.log(response)
+        alltext = response.data;
+      });*/
+
+    chrome.tabs.executeScript({code: "chrome.runtime.sendMessage({ action: 'getText', source: document.body.innerText});"});
+    //console.log(chrome.tabs.executedocument.body.innerText)
 
     // commonplayerinfo (player biography)
     $.ajax({
@@ -47,7 +56,7 @@ $(document).ready(function() {
             $('.height').text(athlete.height);
             $('.weight').text(athlete.weight);
         }
-    }); 
+    });
 
     // playercareerstats
     $.ajax({
