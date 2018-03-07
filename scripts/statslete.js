@@ -52,7 +52,7 @@ $(document).ready(function() {
 
     // playercareerstats
     $.ajax({
-        url: "http://stats.nba.com/stats/playercareerstats/?playerid=202689&permode=Totals",
+        url: "https://stats.nba.com/stats/playercareerstats/?playerid=202689&permode=Totals",
         dataType: "jsonp",
         crossDomain: true,
         success: function (data) {
@@ -64,7 +64,7 @@ $(document).ready(function() {
 
 
     $.ajax({
-        url: 'http://stats.nba.com/stats/playerdashboardbygeneralsplits/?PlayerID=2200&MeasureType=Base&PerMode=PerGame&PlusMinus=N&PaceAdjust=N&Rank=N&Season=2017-18&SeasonType=Regular%20Season&Outcome=&Location=&SeasonSegment=&DateFrom=&DateTo=&VsConference=&VsDivision=&Month=0&OpponentTeamID=0&GameSegment=&Period=0&LastNGames=0',
+        url: 'https://stats.nba.com/stats/playerdashboardbygeneralsplits/?PlayerID=2200&MeasureType=Base&PerMode=PerGame&PlusMinus=N&PaceAdjust=N&Rank=N&Season=2017-18&SeasonType=Regular%20Season&Outcome=&Location=&SeasonSegment=&DateFrom=&DateTo=&VsConference=&VsDivision=&Month=0&OpponentTeamID=0&GameSegment=&Period=0&LastNGames=0',
         dataType: "jsonp",
         crossDomain: true,
         success: function(data) {
