@@ -5,43 +5,40 @@ chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
       if( request.action === "getText" ) {
         //sendResponse({data: request.source, method: "getText"}); //same as innerText
-        console.log(request.source)
-
-        console.log(players)
+        // console.log(request.source)
 
 
-        str = request.source.replace(/\b[-.,()&$#!/\[\]{}"']+\B|\B[-.,()&$#!?/\[\]{}"']+\b/g, "");
+        str = request.source.replace(/\b[-.,()&$#!/\[\]{}"']+\B|\B[-.,()&$#!?/\[\]{}'"]+\b/g, "");
         split = str.trim().split(/\s+/);
-        console.log(split)
-        twoPrev = "a"
-        onePrev = "a"
+        // console.log(split);
+        twoPrev = "a";
+        onePrev = "a";
         for (i = 0; i < split.length; i++) {
-          if(/[A-Z]/.test( split[i][0]) && /[A-Z]/.test( onePrev[0]) && /[A-Z]/.test( twoPrev[0]))
-          {
-            string = twoPrev + " " + onePrev + " " + split[i]
-            if(string in players) {
-              console.log(string)
+            if (/[A-Z]/.test( split[i][0]) && /[A-Z]/.test( onePrev[0]) && /[A-Z]/.test( twoPrev[0])) {
+                string = twoPrev + " " + onePrev + " " + split[i];
+                if (string in players) {
+                    console.log(string);
+                }
+                //console.log(twoPrev + " " + onePrev + " " + split[i])
             }
-            //console.log(twoPrev + " " + onePrev + " " + split[i])
-          }
-          if(/[A-Z]/.test( split[i][0]) && /[A-Z]/.test( onePrev[0]))
-          {
-            string = onePrev + " " + split[i]
-            if(string in players)
-            {
-              console.log(string)
+            if (/[A-Z]/.test( split[i][0]) && /[A-Z]/.test( onePrev[0])) {
+                string = onePrev + " " + split[i]
+                if (string in players) {
+                    console.log(string)
+                }
+                //console.log(onePrev + " " + split[i])
             }
-            //console.log(onePrev + " " + split[i])
-          }
-          /*if(split[i][0] === split[i][0].toUpperCase() && onePrev[0] === onePrev[0].toUpperCase() && twoPrev[0] === twoPrev[0].toUpperCase()){
-            console.log(twoPrev + " " + onePrev + " " + split[i])
-          }
-          if(split[i][0] === split[i][0].toUpperCase() && onePrev[0] === onePrev[0].toUpperCase()){
-            console.log(onePrev + " " + split[i])
-          }*/
-          twoPrev = onePrev
-          onePrev = split[i]
+            /*if(split[i][0] === split[i][0].toUpperCase() && onePrev[0] === onePrev[0].toUpperCase() && twoPrev[0] === twoPrev[0].toUpperCase()){
+                console.log(twoPrev + " " + onePrev + " " + split[i])
+            }
+            if(split[i][0] === split[i][0].toUpperCase() && onePrev[0] === onePrev[0].toUpperCase()){
+                console.log(onePrev + " " + split[i])
+            }*/
+            twoPrev = onePrev
+            onePrev = split[i]
         }
+
+        // make Sterling Brown appear in sidebar
         getPlayerBioInfo(1628425);
       }
     }
