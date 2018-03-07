@@ -38,47 +38,12 @@ chrome.runtime.onMessage.addListener(
             for (var i = 0; i < PLAYERIDS.length; i++) {
                 getPlayerHeader(PLAYERIDS[i]);
             }
-
-            // make Sterling Brown appear in sidebar
-            getPlayerBioInfo(1628425);
-            getPlayerCurrentSeasonStats(2200)
         }
     }
 );
 
 $(document).ready(function() {
     chrome.tabs.executeScript({code: "chrome.runtime.sendMessage({ action: 'getText', source: document.body.innerText});"});
-
-    // playercareerstats
-    // $.ajax({
-    //     url: "https://stats.nba.com/stats/playercareerstats/?playerid=202689&permode=Totals",
-    //     dataType: "jsonp",
-    //     crossDomain: true,
-    //     success: function (data) {
-    //         // log api call results and then print them to chrome extension
-    //         console.log(data);
-    //         // $('.career-stats').text(JSON.stringify(data));
-    //     }
-    // });
-
-
-    // $.ajax({
-    //     url: 'https://stats.nba.com/stats/playerdashboardbygeneralsplits/?PlayerID=2200&MeasureType=Base&PerMode=PerGame&PlusMinus=N&PaceAdjust=N&Rank=N&Season=2017-18&SeasonType=Regular%20Season&Outcome=&Location=&SeasonSegment=&DateFrom=&DateTo=&VsConference=&VsDivision=&Month=0&OpponentTeamID=0&GameSegment=&Period=0&LastNGames=0',
-    //     dataType: "jsonp",
-    //     crossDomain: true,
-    //     success: function(data) {
-    //         var infoNeeded = ["PTS", "REB", "AST", "STL", "BLK", "TOV"]
-    //         var scoringMultiplier = [1,1.2,1.5,3,3,-1]
-    //         var fantasyScore = 0.0
-
-    //         for(i = 0; i < infoNeeded.length; i++){
-    //             var stat = data["resultSets"][0]["rowSet"][0][data["resultSets"][0]["headers"].indexOf(infoNeeded[i])]
-    //             console.log(infoNeeded[i] + " " + stat)
-    //             fantasyScore += parseFloat(stat) * scoringMultiplier[i]
-    //         }
-    //         console.log("Avg fantasy pts: " + fantasyScore)
-    //     }
-    // })
 });
 
 
@@ -128,6 +93,7 @@ function addPlayerListDiv(playerDict) {
     $arrow.html('<img src="arrow.png" style="float:right">');
     $arrow.click(function() {
         getPlayerBioInfo(playerDict.playerId);
+        getPlayerCurrentSeasonStats(playerDict.playerId);
     });
     $athlete_div.append($arrow);
 
@@ -213,7 +179,9 @@ function getPlayerCurrentSeasonStats(playerID) {
 
             populatePlayerCurrentSeasonStats(player);
 
-            console.log(fantasyScore)
+            // console.log(fantasyScore)
+            $('#athlete-bio').show();
+            $('#athlete-list').hide();
         }
     });
 }
@@ -229,7 +197,6 @@ function populatePlayerBioInfo(playerDict) {
     $('#athlete-bio').find('.height').text('Height: ' + playerDict.height);
     $('#athlete-bio').find('.weight').text('Weight: ' + playerDict.weight);
 }
-
 
 
 function populatePlayerCurrentSeasonStats(playerDict) {
