@@ -5,7 +5,7 @@ chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
       if( request.action === "getText" ) {
         //sendResponse({data: request.source, method: "getText"}); //same as innerText
-        console.log(request.source)
+        //console.log(request.source)
 
         console.log(players)
 
@@ -42,7 +42,8 @@ chrome.runtime.onMessage.addListener(
           twoPrev = onePrev
           onePrev = split[i]
         }
-        getPlayerBioInfo(1628425);
+        getPlayerBioInfo(2200);
+        getPlayerCurrentSeasonStats(2200)
       }
     }
 );
@@ -51,35 +52,35 @@ $(document).ready(function() {
     chrome.tabs.executeScript({code: "chrome.runtime.sendMessage({ action: 'getText', source: document.body.innerText});"});
 
     // playercareerstats
-    $.ajax({
-        url: "https://stats.nba.com/stats/playercareerstats/?playerid=202689&permode=Totals",
-        dataType: "jsonp",
-        crossDomain: true,
-        success: function (data) {
-            // log api call results and then print them to chrome extension
-            console.log(data);
-            // $('.career-stats').text(JSON.stringify(data));
-        }
-    });
+    // $.ajax({
+    //     url: "https://stats.nba.com/stats/playercareerstats/?playerid=202689&permode=Totals",
+    //     dataType: "jsonp",
+    //     crossDomain: true,
+    //     success: function (data) {
+    //         // log api call results and then print them to chrome extension
+    //         console.log(data);
+    //         // $('.career-stats').text(JSON.stringify(data));
+    //     }
+    // });
 
 
-    $.ajax({
-        url: 'https://stats.nba.com/stats/playerdashboardbygeneralsplits/?PlayerID=2200&MeasureType=Base&PerMode=PerGame&PlusMinus=N&PaceAdjust=N&Rank=N&Season=2017-18&SeasonType=Regular%20Season&Outcome=&Location=&SeasonSegment=&DateFrom=&DateTo=&VsConference=&VsDivision=&Month=0&OpponentTeamID=0&GameSegment=&Period=0&LastNGames=0',
-        dataType: "jsonp",
-        crossDomain: true,
-        success: function(data) {
-            var infoNeeded = ["PTS", "REB", "AST", "STL", "BLK", "TOV"]
-            var scoringMultiplier = [1,1.2,1.5,3,3,-1]
-            var fantasyScore = 0.0
+    // $.ajax({
+    //     url: 'https://stats.nba.com/stats/playerdashboardbygeneralsplits/?PlayerID=2200&MeasureType=Base&PerMode=PerGame&PlusMinus=N&PaceAdjust=N&Rank=N&Season=2017-18&SeasonType=Regular%20Season&Outcome=&Location=&SeasonSegment=&DateFrom=&DateTo=&VsConference=&VsDivision=&Month=0&OpponentTeamID=0&GameSegment=&Period=0&LastNGames=0',
+    //     dataType: "jsonp",
+    //     crossDomain: true,
+    //     success: function(data) {
+    //         var infoNeeded = ["PTS", "REB", "AST", "STL", "BLK", "TOV"]
+    //         var scoringMultiplier = [1,1.2,1.5,3,3,-1]
+    //         var fantasyScore = 0.0
 
-            for(i = 0; i < infoNeeded.length; i++){
-                var stat = data["resultSets"][0]["rowSet"][0][data["resultSets"][0]["headers"].indexOf(infoNeeded[i])]
-                console.log(infoNeeded[i] + " " + stat)
-                fantasyScore += parseFloat(stat) * scoringMultiplier[i]
-            }
-            console.log("Avg fantasy pts: " + fantasyScore)
-        }
-    })
+    //         for(i = 0; i < infoNeeded.length; i++){
+    //             var stat = data["resultSets"][0]["rowSet"][0][data["resultSets"][0]["headers"].indexOf(infoNeeded[i])]
+    //             console.log(infoNeeded[i] + " " + stat)
+    //             fantasyScore += parseFloat(stat) * scoringMultiplier[i]
+    //         }
+    //         console.log("Avg fantasy pts: " + fantasyScore)
+    //     }
+    // })
 });
 
 // makes an AJAX request to get the biography info for player with playerID.
@@ -118,6 +119,49 @@ function getPlayerBioInfo(playerID) {
     });
 }
 
+function getPlayerCurrentSeasonStats(playerID) {
+    $.ajax({
+        url: "https://stats.nba.com/stats/playerdashboardbygeneralsplits/?PlayerID=" + playerID + "&MeasureType=Base&PerMode=PerGame&PlusMinus=N&PaceAdjust=N&Rank=N&Season=2017-18&SeasonType=Regular%20Season&Outcome=&Location=&SeasonSegment=&DateFrom=&DateTo=&VsConference=&VsDivision=&Month=0&OpponentTeamID=0&GameSegment=&Period=0&LastNGames=0",
+        dataType: "jsonp",
+        crossDomain: true,
+        success: function (data) {
+            console.log(data);
+
+            //Store relevant player stats, and multipliers to calculate fantasy score
+            var relevantStats = ["PTS", "REB", "AST", "STL", "BLK", "TOV"]
+            var scoringMultiplier = [1,1.2,1.5,3,3,-1]
+            var fantasyScore = 0.0
+            var parsed_data = {}
+
+            for(i = 0; i < relevantStats.length; i++){
+
+              //Find stat from database
+              var stat = data["resultSets"][0]["rowSet"][0][data["resultSets"][0]["headers"].indexOf(relevantStats[i])]
+              //Add to dict
+              parsed_data[relevantStats[i]] = stat
+              //Calc fantasy score
+              fantasyScore += parseFloat(stat) * scoringMultiplier[i]
+            }
+
+
+            var player = {
+                
+                'pts': parsed_data["PTS"],
+                'reb': parsed_data["REB"],
+                'ast': parsed_data["AST"],
+                'stl': parsed_data["STL"],
+                'blk': parsed_data["BLK"],
+                'tov': parsed_data["TOV"],
+                'score': fantasyScore
+            }
+
+            populatePlayerCurrentSeasonStats(player);
+
+            console.log(fantasyScore)
+        }
+    });
+}
+
 // called from getPlayerBioInfo()
 function populatePlayerBioInfo(playerDict) {
     $('.athlete-photo').css('background-image', 'url("' + playerDict.image + '")')
@@ -129,3 +173,21 @@ function populatePlayerBioInfo(playerDict) {
     $('.height').text('Height: ' + playerDict.height);
     $('.weight').text('Weight: ' + playerDict.weight);
 }
+
+
+
+function populatePlayerCurrentSeasonStats(playerDict) {
+    
+    $('.pts').text('PTS: ' + playerDict.pts)
+    $('.reb').text('REB: ' + playerDict.reb)
+    $('.ast').text('AST: ' + playerDict.ast)
+    $('.stl').text('STL: ' + playerDict.stl)
+    $('.blk').text('BLK: ' + playerDict.blk)
+    $('.tov').text('TOV: ' + playerDict.tov)
+    $('.score').text('AVG FANTASY PPG: ' + playerDict.score)
+}
+
+
+
+
+

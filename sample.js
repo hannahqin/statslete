@@ -33,10 +33,6 @@ var id = chrome.contextMenus.create({"title": title, "contexts":context,
 console.log("'" + context + "' item:" + id);
 
 
-
-
-
-
 // Ignore all this for now, this is for notifications!!
 function launch() {
   chrome.app.window.create('statslete.html', {
