@@ -233,7 +233,6 @@ function populatePlayerBioInfo(playerDict) {
 
 
 function populatePlayerCurrentSeasonStats(playerDict) {
-    
     $('.pts').text('PTS:  ' + playerDict.pts)
     $('.reb').text('REB:  ' + playerDict.reb)
     $('.ast').text('AST:  ' + playerDict.ast)
