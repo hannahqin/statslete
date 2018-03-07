@@ -171,6 +171,7 @@ function getPlayerCurrentSeasonStats(playerID) {
               //Calc fantasy score
               fantasyScore += parseFloat(stat) * scoringMultiplier[i]
             }
+            fantasyScore = fantasyScore.toFixed(2);
 
 
             var player = {
