@@ -4,8 +4,30 @@ body {
     padding: 0 5%;
 }
 
+.back {
+    font-size: 15px;
+    display: absolute;
+    float: left;
+    position: relative;
+    top: 5px;
+    color: blue;
+}
+.back:hover {
+    cursor: pointer;
+}
+
+#title {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-style: italic;
+    padding-bottom: 10px;
+    border-bottom: .5px solid lightgray;
+    color: #32394C;
+}
+
 span {
-    margin-right: 20px;
+    margin-right: 10px;
 }
 
 .arrow {
@@ -13,7 +35,6 @@ span {
     top: 50px;
     position: relative;
 }
-
 .arrow:hover {
     cursor: pointer;
 }
@@ -26,15 +47,6 @@ span {
 .col {
     display: inline-block;
     vertical-align: middle;
-}
-
-#title {
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    font-style: italic;
-    padding-bottom: 10px;
-    border-bottom: .5px solid lightgray;
 }
 
 

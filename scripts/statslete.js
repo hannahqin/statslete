@@ -48,6 +48,12 @@ chrome.runtime.onMessage.addListener(
 
 $(document).ready(function() {
     chrome.tabs.executeScript({code: "chrome.runtime.sendMessage({ action: 'getText', source: document.body.innerText});"});
+
+    $('.back').click(function() {
+        $('#athlete-bio').hide();
+        $('.back').hide();
+        $('#athlete-list').show();
+    });
 });
 
 
@@ -107,7 +113,7 @@ function addPlayerListDiv(playerDict) {
     $('#' + id).find('.athlete-photo').css('background-image', 'url("' + playerDict.image + '")')
     $('#' + id).find('.athlete-name').text(playerDict.name);
     $('#' + id).find('.team-name').text(playerDict.team);
-    $('#' + id).find('.position .number').text(playerDict.number + ', ');
+    $('#' + id).find('.position .number').text(playerDict.number);
     $('#' + id).find('.position .position-title').text(playerDict.position);
 }
 
@@ -188,6 +194,7 @@ function getPlayerCurrentSeasonStats(playerID) {
 
             // console.log(fantasyScore)
             $('#athlete-bio').show();
+            $('.back').show();
             $('#athlete-list').hide();
         }
     });
@@ -198,7 +205,7 @@ function populatePlayerBioInfo(playerDict) {
     $('#athlete-bio').find('.athlete-photo').css('background-image', 'url("' + playerDict.image + '")')
     $('#athlete-bio').find('.athlete-name').text(playerDict.name);
     $('#athlete-bio').find('.team-name').text(playerDict.team);
-    $('#athlete-bio').find('.position .number').text(playerDict.number + ', ');
+    $('#athlete-bio').find('.position .number').text(playerDict.number);
     $('#athlete-bio').find('.position .position-title').text(playerDict.position);
     $('#athlete-bio').find('.school').text('College: ' + playerDict.school);
     $('#athlete-bio').find('.height').text('Height: ' + playerDict.height);
