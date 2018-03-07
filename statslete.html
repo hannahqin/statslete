@@ -12,14 +12,14 @@
         <span class="back" onclick="goBack()">Back</span>
         <h1 id="title">STATSLETE</h1>
     </div>
-    <div id="athlete-list"></div>
-    <div id="athlete-bio">
-        <div class="bio1">
+    <div id="player-list"></div>
+    <div id="player-bio">
+        <div class="section bio-header">
             <div class="col">
-                <div class="athlete-photo"></div>
+                <div class="player-photo"></div>
             </div>
             <div class="col">
-                <h2 class="athlete-name"></h2>
+                <h2 class="player-name"></h2>
                 <h4 class="team-name"></h4>
                 <h4 class="position">
                     <span class="number"></span>
@@ -27,24 +27,46 @@
                 </h4>
             </div>
         </div>
-        <div class="bio2">
-            <p class="school"></p>
-            <p class="height"></p>
-            <p class="weight"></p>
+        <div class="section bio-info">
+            <h3>Personal Information</h3>
+            <div class="info-col">
+                <h5>College:</h5>
+                <h5>Height:</h5>
+                <h5>Weight:</h5>
+            </div>
+            <div class="info-col">
+                <p class="school"></p>
+                <p class="height"></p>
+                <p class="weight"></p>
+            </div>
         </div>
 
-        <div class="stats">
-            <h2>Stats</h2>
-            <h4>
-                <span class="pts"></span>
-                <span class="reb"></span>
-                <span class="ast"></span>
-            </h4>
-            <h4> 
-                <span class="stl"></span>
-                <span class="blk"></span>
-                <span class="tov"></span>
-            </h4>
+        <div class="section stats">
+            <h3>Fantasy Stats</h3>
+            <div class="stats-col">
+                <h5>PTS: </h5>
+                <h5>STL: </h5>
+            </div>
+            <div class="stats-col">
+                <p class="pts"></p>
+                <p class="stl"></p>
+            </div>
+            <div class="stats-col">
+                <h5>REB: </h5>
+                <h5>BLK: </h5>
+            </div>
+            <div class="stats-col">
+                <p class="reb"></p>
+                <p class="blk"></p>
+            </div>
+            <div class="stats-col">
+                <h5>AST: </h5>
+                <h5>TOV: </h5>
+            </div>
+            <div class="stats-col">
+                <p class="ast"></p>
+                <p class="tov"></p>
+            </div>
             <h4 class="score"></h4>
         </div>
     </div>

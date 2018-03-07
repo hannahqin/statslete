@@ -6,15 +6,15 @@ body {
 
 .back {
     font-size: 15px;
-    display: absolute;
+    display: none;
     float: left;
-    position: relative;
-    top: 5px;
-    color: blue;
+    position: absolute;
+    top: 20px;
+    color: #3366BB;
 }
-.back:hover {
-    cursor: pointer;
-}
+    .back:hover {
+        cursor: pointer;
+    }
 
 #title {
     text-align: center;
@@ -26,21 +26,40 @@ body {
     color: #32394C;
 }
 
-span {
-    margin-right: 10px;
-}
 
 .arrow {
     float: right;
     top: 50px;
     position: relative;
 }
-.arrow:hover {
-    cursor: pointer;
+    .arrow:hover {
+        cursor: pointer;
+    }
+
+
+#player-list .player {
+    margin-bottom: 25px;
+}
+
+#player-list .player-name {
+    font-size: 22px;
+    margin: 5px 0;
+    padding-top: 10px;
+}
+#player-list .team-name {
+    font-size: 18px;
+    font-weight: 400;
+    margin: 8px 0;
+}
+#player-list .position {
+    font-size: 17px;
+    font-weight: 400;
+    color: gray;
+    margin: 8px 0;
 }
 
 
-#athlete-bio {
+#player-bio {
     display: none;
 }
 
@@ -49,8 +68,17 @@ span {
     vertical-align: middle;
 }
 
+.section {
+    margin-top: 20px;
+}
 
-.athlete-photo {
+.section h3 {
+    font-size: 22px;
+    margin: 22px 0 8px;
+}
+
+
+.player-photo {
     width: 100px;
     height: 125px;
     background-size: cover;
@@ -58,65 +86,67 @@ span {
     margin-right: 30px;
 }
 
-.bio2 {
-    margin-top: 20px;
-}
 
-.bio1 h4, .bio2 p {
-    font-size: 16px;
-    font-weight: 400;
-    margin: 6px 0;
-}
 
-.bio1 .athlete-name {
+.bio-header .player-name {
     font-size: 26px;
-    margin: 10px 0;
+    margin: 5px 0;
     padding-top: 10px;
 }
 
-.bio1 .team-name {
+.bio-header .team-name {
     font-size: 20px;
 }
 
-.bio1 .position {
+.bio-header .position {
     font-size: 18px;
     color: gray;
 }
 
-
-/*.stats .pts {
-    font-size: 15px;
+.bio-header h4 {
+    font-size: 16px;
+    font-weight: 400;
+    margin: 4px 0;
 }
 
-.stats .reb {
-    font-size: 15px;
+.info-col {
+    display: inline-block;
+    width: 60px;
+}
+.info-col:last-child {
+    width: 200px;
 }
 
-.stats .ast {
-    font-size: 15px;
+.info-col p, .stats-col p {
+    font-size: 16px;
+    font-weight: 400;
+    margin: 5px 0;
 }
 
-.stats .stl {
-    font-size: 15px;
+.info-col h5, .stats-col h5 {
+    font-size: 16px;
+    font-style: bold;
+    margin: 5px 0;
 }
 
-.stats .blk {
-    font-size: 15px;
-}
 
-.stats .tov {
-    font-size: 15px;
-}
-
-.stats .score {
-    font-size: 18px;
-}*/
 
 .stats {
     font-size: 14px;
     font-family: 'Source Sans Pro', sans-serif;
 }
 
+.stats-col {
+    display: inline-block;
+    width: 30px;
+    margin-right: 10px;
+}
+
+.score {
+    font-size: 16px;
+    font-style: bold;
+    margin: 5px 0 30px;
+}
 
 
 

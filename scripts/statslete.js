@@ -50,16 +50,16 @@ $(document).ready(function() {
     chrome.tabs.executeScript({code: "chrome.runtime.sendMessage({ action: 'getText', source: document.body.innerText});"});
 
     $('.back').click(function() {
-        $('#athlete-bio').hide();
+        $('#player-bio').hide();
         $('.back').hide();
-        $('#athlete-list').show();
+        $('#player-list').show();
     });
 });
 
 
-// Adds athlete with playerId to the list displayed of athletes that appear
-// in the current page. When you click on an athlete in the list, it will call
-// getPlayerBioInfo() to show more detailed info about that athlete.
+// Adds player with playerId to the list displayed of players that appear
+// in the current page. When you click on an player in the list, it will call
+// getPlayerBioInfo() to show more detailed info about that player.
 function getPlayerHeader(playerId) {
   //console.log("HFKDS")
   //console.log(playerId)
@@ -97,10 +97,10 @@ function getPlayerHeader(playerId) {
 // Add a player to the list of players in the article using the info from playerDict
 function addPlayerListDiv(playerDict) {
     var id = playerDict.name.replace(/\s+/g, '-').toLowerCase();
-    var $athlete_div = $("<div>", {"class": "athlete", "id": id});
+    var $athlete_div = $("<div>", {"class": "player", "id": id});
 
-    $athlete_div.html('<div class="col"><div class="athlete-photo"></div></div><div class="col"><h2 class="athlete-name"></h2><h4 class="team-name"></h4><h4 class="position"><span class="number"></span><span class="position-title"></span></h4></div>');
-    $("#athlete-list").append($athlete_div);
+    $athlete_div.html('<div class="col"><div class="player-photo"></div></div><div class="col"><h2 class="player-name"></h2><h4 class="team-name"></h4><h4 class="position"><span class="number"></span><span class="position-title"></span></h4></div>');
+    $("#player-list").append($athlete_div);
 
     var $arrow = $("<span>", {"class": "arrow"});
     $arrow.html('<img src="arrow.png" style="float:right">');
@@ -110,10 +110,10 @@ function addPlayerListDiv(playerDict) {
     });
     $athlete_div.append($arrow);
 
-    $('#' + id).find('.athlete-photo').css('background-image', 'url("' + playerDict.image + '")')
-    $('#' + id).find('.athlete-name').text(playerDict.name);
+    $('#' + id).find('.player-photo').css('background-image', 'url("' + playerDict.image + '")')
+    $('#' + id).find('.player-name').text(playerDict.name);
     $('#' + id).find('.team-name').text(playerDict.team);
-    $('#' + id).find('.position .number').text(playerDict.number);
+    $('#' + id).find('.position .number').text(playerDict.number + ', ');
     $('#' + id).find('.position .position-title').text(playerDict.position);
 }
 
@@ -194,32 +194,32 @@ function getPlayerCurrentSeasonStats(playerID) {
             populatePlayerCurrentSeasonStats(player);
 
             // console.log(fantasyScore)
-            $('#athlete-bio').show();
+            $('#player-bio').show();
             $('.back').show();
-            $('#athlete-list').hide();
+            $('#player-list').hide();
         }
     });
 }
 
 // called from getPlayerBioInfo()
 function populatePlayerBioInfo(playerDict) {
-    $('#athlete-bio').find('.athlete-photo').css('background-image', 'url("' + playerDict.image + '")')
-    $('#athlete-bio').find('.athlete-name').text(playerDict.name);
-    $('#athlete-bio').find('.team-name').text(playerDict.team);
-    $('#athlete-bio').find('.position .number').text(playerDict.number);
-    $('#athlete-bio').find('.position .position-title').text(playerDict.position);
-    $('#athlete-bio').find('.school').text('College: ' + playerDict.school);
-    $('#athlete-bio').find('.height').text('Height: ' + playerDict.height);
-    $('#athlete-bio').find('.weight').text('Weight: ' + playerDict.weight);
+    $('#player-bio').find('.player-photo').css('background-image', 'url("' + playerDict.image + '")')
+    $('#player-bio').find('.player-name').text(playerDict.name);
+    $('#player-bio').find('.team-name').text(playerDict.team);
+    $('#player-bio').find('.position .number').text(playerDict.number + ', ');
+    $('#player-bio').find('.position .position-title').text(playerDict.position);
+    $('#player-bio').find('.school').text(playerDict.school);
+    $('#player-bio').find('.height').text(playerDict.height);
+    $('#player-bio').find('.weight').text(playerDict.weight);
 }
 
 
 function populatePlayerCurrentSeasonStats(playerDict) {
-    $('.pts').text('PTS:  ' + playerDict.pts)
-    $('.reb').text('REB:  ' + playerDict.reb)
-    $('.ast').text('AST:  ' + playerDict.ast)
-    $('.stl').text('STL:  ' + playerDict.stl)
-    $('.blk').text('BLK:  ' + playerDict.blk)
-    $('.tov').text('TOV:  ' + playerDict.tov)
+    $('.pts').text(playerDict.pts)
+    $('.reb').text(playerDict.reb)
+    $('.ast').text(playerDict.ast)
+    $('.stl').text(playerDict.stl)
+    $('.blk').text(playerDict.blk)
+    $('.tov').text(playerDict.tov)
     $('.score').text('Fantasy PPG:  ' + playerDict.score)
 }
