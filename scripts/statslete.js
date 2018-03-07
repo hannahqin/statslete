@@ -164,7 +164,7 @@ function populatePlayerBioInfo(playerDict) {
     $('.athlete-photo').css('background-image', 'url("' + playerDict.image + '")')
     $('.athlete-name').text(playerDict.name);
     $('.team-name').text(playerDict.team);
-    $('.position .number').text(playerDict.number + ', ');
+    $('.position .number').text(playerDict.number + ' ');
     $('.position .position-title').text(playerDict.position);
     $('.school').text('College: ' + playerDict.school);
     $('.height').text('Height: ' + playerDict.height);
@@ -175,13 +175,13 @@ function populatePlayerBioInfo(playerDict) {
 
 function populatePlayerCurrentSeasonStats(playerDict) {
     
-    $('.pts').text('PTS: ' + playerDict.pts)
-    $('.reb').text('REB: ' + playerDict.reb)
-    $('.ast').text('AST: ' + playerDict.ast)
-    $('.stl').text('STL: ' + playerDict.stl)
-    $('.blk').text('BLK: ' + playerDict.blk)
-    $('.tov').text('TOV: ' + playerDict.tov)
-    $('.score').text('AVG FANTASY PPG: ' + playerDict.score)
+    $('.pts').text('PTS:  ' + playerDict.pts)
+    $('.reb').text('REB:  ' + playerDict.reb)
+    $('.ast').text('AST:  ' + playerDict.ast)
+    $('.stl').text('STL:  ' + playerDict.stl)
+    $('.blk').text('BLK:  ' + playerDict.blk)
+    $('.tov').text('TOV:  ' + playerDict.tov)
+    $('.score').text('Fantasy PPG:  ' + playerDict.score)
 }
 
 

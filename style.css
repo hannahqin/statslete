@@ -4,6 +4,10 @@ body {
     padding: 0 5%;
 }
 
+span{
+    margin-right: 20px;
+}
+
 .col {
     display: inline-block;
     vertical-align: middle;
@@ -51,3 +55,42 @@ body {
     font-size: 18px;
     color: gray;
 }
+
+
+/*.stats .pts {
+    font-size: 15px;
+}
+
+.stats .reb {
+    font-size: 15px;
+}
+
+.stats .ast {
+    font-size: 15px;
+}
+
+.stats .stl {
+    font-size: 15px;
+}
+
+.stats .blk {
+    font-size: 15px;
+}
+
+.stats .tov {
+    font-size: 15px;
+}
+
+.stats .score {
+    font-size: 18px;
+}*/
+
+.stats {
+    font-size: 14px;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+
+
+
+
