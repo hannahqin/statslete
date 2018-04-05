@@ -113,11 +113,38 @@ function addPlayerListDiv(playerDict) {
     });
     $athlete_div.append($arrow);
 
+    var star = $("<span>", {"class": "arrow"});
+    star.html('<img src="unselected_star.png" style="float:right">');
+    star.click(function() {
+        changeSavedStatus(playerDict.playerId);
+    });
+    $athlete_div.append(star);
+
     $('#' + id).find('.player-photo').css('background-image', 'url("' + playerDict.image + '")')
     $('#' + id).find('.player-name').text(playerDict.name);
     $('#' + id).find('.team-name').text(playerDict.team);
     $('#' + id).find('.position .number').text(playerDict.number + ', ');
     $('#' + id).find('.position .position-title').text(playerDict.position);
+}
+
+// If player is already saved, remove the player!
+// If player is not saved, save them!
+function changeSavedStatus(playerId) {
+
+  var defaultValue = new Set();
+  chrome.storage.sync.get({players: defaultValue}, function(data) {
+    // data.links will be either the stored value, or defaultValue if nothing is set
+    if(data.players.has(playerId)) {
+      data.players.delete(playerId)
+    }
+    else {
+      data.players.add(playerId)
+    }
+    chrome.storage.sync.set({players: data.players}, function() {
+      // The value is now stored, so you don't have to do this again
+    });
+  });
+
 }
 
 
