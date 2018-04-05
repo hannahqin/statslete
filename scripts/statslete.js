@@ -6,10 +6,6 @@ chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
 
         if ( request.action === "getText" ) {
-            //sendResponse({data: request.source, method: "getText"}); //same as innerText
-            // console.log(request.source)
-
-
             // parse consecutive capital letters in article
             str = request.source.replace(/\b[-.,()&$#!/\[\]{}"']+\B|\B[-.,()&$#!?/\[\]{}'"]+\b/g, "");
             split = str.trim().split(/\s+/);
@@ -42,7 +38,6 @@ chrome.runtime.onMessage.addListener(
             }
 
             for (var i = 0; i < PLAYERIDS.length; i++) {
-                // console.log("YO")
                 getPlayerHeader(PLAYERIDS[i]);
             }
         }
@@ -57,6 +52,9 @@ $(document).ready(function() {
         $('.back').hide();
         $('#player-list').show();
     });
+
+    $('#article').click(showArticlePlayers);
+    $('#saved').click(showSavedPlayers);
 });
 
 
@@ -64,14 +62,11 @@ $(document).ready(function() {
 // in the current page. When you click on an player in the list, it will call
 // getPlayerBioInfo() to show more detailed info about that player.
 function getPlayerHeader(playerId) {
-  //console.log("HFKDS")
-  //console.log(playerId)
     $.ajax({
         url: "https://stats.nba.com/stats/commonplayerinfo/?playerid=" + playerId,
         dataType: "jsonp",
         crossDomain: true,
         success: function (data) {
-            // console.log("HI")
             // parse common player info into bio information
             var headers = ["FIRST_NAME", "LAST_NAME", "TEAM_NAME", "TEAM_CITY", "JERSEY", "POSITION"];
             var parsed_data = {}
@@ -196,7 +191,6 @@ function getPlayerCurrentSeasonStats(playerID) {
 
             populatePlayerCurrentSeasonStats(player);
 
-            // console.log(fantasyScore)
             $('#player-bio').show();
             $('.back').show();
             $('#player-list').hide();
@@ -226,3 +220,26 @@ function populatePlayerCurrentSeasonStats(playerDict) {
     $('.tov').text(playerDict.tov)
     $('.score').text('Fantasy PPG:  ' + playerDict.score)
 }
+
+
+
+
+
+//////////// SAVED FUNCTIONALITY \\\\\\\\\\\\\\\
+function showArticlePlayers() {
+    $('#article').addClass('active');
+    $('#saved').removeClass('active');
+
+}
+
+
+function showSavedPlayers() {
+    $('#saved').addClass('active');
+    $('#article').removeClass('active');
+
+}
+
+
+
+
+
