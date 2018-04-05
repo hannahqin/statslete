@@ -139,7 +139,7 @@ function getPlayerBioInfo(playerId) {
             }
 
             // get player image url
-            var image_url = "https://nba-players.herokuapp.com/players/" + parsed_data['LAST_NAME'] + "/" + parsed_data['FIRST_NAME'];
+            var image_url = "https://nba-players.herokuapp.com/players/" + parsed_data['LAST_NAME'].replace(".", "").replace(" ", "_") + "/" + parsed_data['FIRST_NAME'].replace("'", "");
 
             var player = {
                 'name': parsed_data['FIRST_NAME'] + ' ' + parsed_data['LAST_NAME'],
