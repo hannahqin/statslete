@@ -77,7 +77,7 @@ function getPlayerHeader(playerId) {
             }
 
             // get player image url
-            var image_url = "https://nba-players.herokuapp.com/players/" + parsed_data['LAST_NAME'] + "/" + parsed_data['FIRST_NAME'];
+            var image_url = "https://nba-players.herokuapp.com/players/" + parsed_data['LAST_NAME'] + "/" + parsed_data['FIRST_NAME'].replace("'", "");
 
             var player = {
                 'playerId': playerId,
@@ -96,7 +96,7 @@ function getPlayerHeader(playerId) {
 
 // Add a player to the list of players in the article using the info from playerDict
 function addPlayerListDiv(playerDict) {
-    var id = playerDict.name.replace(/\s+/g, '-').toLowerCase();
+    var id = playerDict.name.replace("'", "").replace(/\s+/g, '-').toLowerCase();
     var $athlete_div = $("<div>", {"class": "player", "id": id});
 
     $athlete_div.html('<div class="col"><div class="player-photo"></div></div><div class="col"><h2 class="player-name"></h2><h4 class="team-name"></h4><h4 class="position"><span class="number"></span><span class="position-title"></span></h4></div>');
