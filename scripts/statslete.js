@@ -155,12 +155,12 @@ function changeSavedStatus(playerId) {
   chrome.storage.sync.get({['players']: defaultValue}, function(data) {
     // data.links will be either the stored value, or defaultValue if nothing is set
     if(playerId in data.players) {
-      console.log("DELETING")
+      console.log("DELETING" + playerId)
       delete data.players[playerId]
       // data.players.delete(playerId)
     }
     else {
-      console.log("ADDING")
+      console.log("ADDING" + playerId)
       data.players[playerId] = 1
       // data.players.add(playerId)
     }
@@ -286,6 +286,8 @@ function populatePlayerCurrentSeasonStats(playerDict) {
 function showArticlePlayers() {
     $('#article').addClass('active');
     $('#saved').removeClass('active');
+    $("#player-list").empty();
+    chrome.tabs.executeScript({code: "chrome.runtime.sendMessage({ action: 'getText', source: document.body.innerText});"});
 
 }
 
@@ -293,5 +295,15 @@ function showArticlePlayers() {
 function showSavedPlayers() {
     $('#saved').addClass('active');
     $('#article').removeClass('active');
+
+    $("#player-list").empty();
+    var defaultValue = {"201935" : 1}
+
+  chrome.storage.sync.get({['players']: defaultValue}, function(data) {
+      // data.links will be either the stored value, or defaultValue if nothing is set
+    for(var playerId in data.players) {
+      getPlayerHeader(playerId)
+    }
+  });
 
 }
