@@ -126,20 +126,31 @@ function addPlayerListDiv(playerDict) {
 // If player is not saved, save them!
 function changeSavedStatus(playerId) {
 
-  var defaultValue = new Set();
-  chrome.storage.sync.get({players: defaultValue}, function(data) {
+  console.log("YO")
+  var defaultValue = {"201935" : 1}
+  //chrome.storage.sync.clear()
+  //chrome.storage.sync.set({players: defaultValue}, function() {
+  //   console.log('Key is set to ' + "HI");
+  //});
+
+  chrome.storage.sync.get({['players']: defaultValue}, function(data) {
     // data.links will be either the stored value, or defaultValue if nothing is set
-    if(data.players.has(playerId)) {
-      data.players.delete(playerId)
+    if(playerId in data.players) {
+      console.log("DELETING")
+      delete data.players[playerId]
+      // data.players.delete(playerId)
     }
     else {
-      data.players.add(playerId)
+      console.log("ADDING")
+      data.players[playerId] = 1
+      // data.players.add(playerId)
     }
+    var dict = data.players
+
     chrome.storage.sync.set({players: data.players}, function() {
       // The value is now stored, so you don't have to do this again
     });
   });
-
 }
 
 
@@ -265,8 +276,3 @@ function showSavedPlayers() {
     $('#article').removeClass('active');
 
 }
-
-
-
-
-
