@@ -108,12 +108,31 @@ function addPlayerListDiv(playerDict) {
     });
     $athlete_div.append($arrow);
 
-    var star = $("<span>", {"class": "arrow"});
-    star.html('<img src="unselected_star.png" style="float:right">');
-    star.click(function() {
-        changeSavedStatus(playerDict.playerId);
+
+
+    var $star = $("<span>", {"class": "arrow"});
+    var defaultValue = {"201935" : 1}
+
+    chrome.storage.sync.get({['players']: defaultValue}, function(data) {
+      // data.links will be either the stored value, or defaultValue if nothing is set
+      if(playerDict.playerId in data.players) {
+        $star.html('<img src="selected_star.png" style="float:right" id="star">');
+      }
+      else {
+        $star.html('<img src="unselected_star.png" style="float:right" id="star">');
+      }
     });
-    $athlete_div.append(star);
+
+    $star.click(function() {
+        changeSavedStatus(playerDict.playerId);
+        if ($(this).find('img').attr("src") == "unselected_star.png"){
+          $star.html('<img src="selected_star.png" style="float:right" id="star">');
+        }
+        else{
+          $star.html('<img src="unselected_star.png" style="float:right" id="star">');
+        }
+    });
+    $athlete_div.append($star);
 
     $('#' + id).find('.player-photo').css('background-image', 'url("' + playerDict.image + '")')
     $('#' + id).find('.player-name').text(playerDict.name);
