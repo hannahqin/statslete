@@ -111,7 +111,7 @@ function addPlayerListDiv(playerDict) {
 
 
     var $star = $("<span>", {"class": "arrow"});
-    var defaultValue = {"201935" : 1}
+    var defaultValue = {}
 
     chrome.storage.sync.get({['players']: defaultValue}, function(data) {
       // data.links will be either the stored value, or defaultValue if nothing is set
@@ -146,7 +146,7 @@ function addPlayerListDiv(playerDict) {
 function changeSavedStatus(playerId) {
 
   console.log("YO")
-  var defaultValue = {"201935" : 1}
+  var defaultValue = {}
   //chrome.storage.sync.clear()
   //chrome.storage.sync.set({players: defaultValue}, function() {
   //   console.log('Key is set to ' + "HI");
@@ -297,7 +297,7 @@ function showSavedPlayers() {
     $('#article').removeClass('active');
 
     $("#player-list").empty();
-    var defaultValue = {"201935" : 1}
+    var defaultValue = {}
 
   chrome.storage.sync.get({['players']: defaultValue}, function(data) {
       // data.links will be either the stored value, or defaultValue if nothing is set
