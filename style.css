@@ -36,6 +36,16 @@ body {
         cursor: pointer;
     }
 
+.star-wrapper {
+    top: 2px;
+    position: relative;
+}
+
+#star {
+    width: 22px;
+    margin-left: 10px;
+}
+
 
 .tabs {
     text-align: center;
@@ -69,6 +79,7 @@ body {
     font-size: 22px;
     margin: 5px 0;
     padding-top: 10px;
+    display: inline-block;
 }
 #player-list .team-name {
     font-size: 18px;

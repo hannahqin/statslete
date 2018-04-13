@@ -110,29 +110,30 @@ function addPlayerListDiv(playerDict) {
 
 
 
-    var $star = $("<span>", {"class": "arrow"});
+    var $star = $("<span>", {"class": "star-wrapper"});
     var defaultValue = {}
 
     chrome.storage.sync.get({['players']: defaultValue}, function(data) {
       // data.links will be either the stored value, or defaultValue if nothing is set
       if(playerDict.playerId in data.players) {
-        $star.html('<img src="selected_star.png" style="float:right" id="star">');
+        $star.html('<img src="selected_star.png" id="star">');
       }
       else {
-        $star.html('<img src="unselected_star.png" style="float:right" id="star">');
+        $star.html('<img src="unselected_star.png" id="star">');
       }
     });
 
     $star.click(function() {
         changeSavedStatus(playerDict.playerId);
         if ($(this).find('img').attr("src") == "unselected_star.png"){
-          $star.html('<img src="selected_star.png" style="float:right" id="star">');
+          $star.html('<img src="selected_star.png" id="star">');
         }
         else{
-          $star.html('<img src="unselected_star.png" style="float:right" id="star">');
+          $star.html('<img src="unselected_star.png" id="star">');
         }
     });
-    $athlete_div.append($star);
+    console.log($('#' + id).find('.player-name'));
+    $('#' + id).find('.player-name').after($star);
 
     $('#' + id).find('.player-photo').css('background-image', 'url("' + playerDict.image + '")')
     $('#' + id).find('.player-name').text(playerDict.name);
